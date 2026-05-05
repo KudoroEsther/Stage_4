@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-head">
+  <div>
+    <p class="eyebrow">Profiles</p>
+    <h1>Directory</h1>
+  </div>
+</section>
+{% if request.query_params.get('error') %}
+<p class="error">{{ request.query_params.get('error') }}</p>
+{% endif %}
+{% if request.query_params.get('success') %}
+<p class="success">{{ request.query_params.get('success') }}</p>
+{% endif %}
+<section class="card">
+  <form method="get" action="/profiles" class="filters">
+    <input type="text" name="gender" placeholder="gender" value="{{ filters.get('gender', '') }}" />
+    <input type="text" name="country_id" placeholder="country" value="{{ filters.get('country_id', '') }}" />
+    <input type="text" name="age_group" placeholder="age group" value="{{ filters.get('age_group', '') }}" />
+    <input type="number" name="min_age" placeholder="min age" value="{{ filters.get('min_age', '') }}" />
+    <input type="number" name="max_age" placeholder="max age" value="{{ filters.get('max_age', '') }}" />
+    <select name="sort_by">
+      <option value="">sort by</option>
+      <option value="age">age</option>
+      <option value="created_at">created_at</option>
+      <option value="gender_probability">gender_probability</option>
+    </select>
+    <select name="order">
+      <option value="asc">asc</option>
+      <option value="desc">desc</option>
+    </select>
+    <button type="submit">Apply</button>
+  </form>
+</section>
+<section class="card">
+  <form method="post" action="/profiles" class="inline-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token or '' }}" />
+    <input type="text" name="name" placeholder="Create profile by name" />
+    <button type="submit">Create profile</button>
+  </form>
+</section>
+<section class="card">
+  <form method="post" action="/profiles/upload" enctype="multipart/form-data" class="inline-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token or '' }}" />
+    <input type="file" name="file" accept=".csv,text/csv" />
+    <button type="submit">Upload CSV</button>
+  </form>
+  <p class="helper">Admin-only upload. Valid rows are inserted in batches and invalid rows are skipped.</p>
+</section>
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Age group</th>
+        <th>Country</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in payload.data %}
+      <tr>
+        <td><a href="/profiles/{{ row.id }}">{{ row.name }}</a></td>
+        <td>{{ row.gender }}</td>
+        <td>{{ row.age }}</td>
+        <td>{{ row.age_group }}</td>
+        <td>{{ row.country_name }} ({{ row.country_id }})</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="pager">
+    <span>Page {{ payload.page }} of {{ payload.total_pages }}</span>
+    {% if payload.links.prev %}
+    <a href="{{ payload.links.prev }}">Previous</a>
+    {% endif %}
+    {% if payload.links.next %}
+    <a href="{{ payload.links.next }}">Next</a>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

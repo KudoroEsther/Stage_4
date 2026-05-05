@@ -1,0 +1,13 @@
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+httpx==0.28.1
+sqlalchemy==2.0.40
+databases[asyncpg]==0.9.0
+asyncpg==0.30.0
+psycopg2-binary==2.9.10
+aiosqlite==0.20.0
+python-dotenv==1.1.0
+uuid_utils==0.11.0
+pydantic==2.11.4
+PyJWT==2.10.1
+python-multipart==0.0.20

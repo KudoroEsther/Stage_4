@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <p class="eyebrow">Profile detail</p>
+  <h1>{{ profile.name }}</h1>
+  <dl class="detail-grid">
+    <dt>ID</dt><dd>{{ profile.id }}</dd>
+    <dt>Gender</dt><dd>{{ profile.gender }} ({{ profile.gender_probability }})</dd>
+    <dt>Age</dt><dd>{{ profile.age }} / {{ profile.age_group }}</dd>
+    <dt>Country</dt><dd>{{ profile.country_name }} ({{ profile.country_id }})</dd>
+    <dt>Created</dt><dd>{{ profile.created_at }}</dd>
+  </dl>
+  <form action="/profiles/{{ profile.id }}/delete" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token or '' }}" />
+    <button type="submit" class="danger">Delete profile</button>
+  </form>
+</section>
+{% endblock %}

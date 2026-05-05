@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <p class="eyebrow">Account</p>
+  <h1>@{{ user.username }}</h1>
+  <dl class="detail-grid">
+    <dt>Email</dt><dd>{{ user.email }}</dd>
+    <dt>Role</dt><dd>{{ user.role }}</dd>
+    <dt>Active</dt><dd>{{ user.is_active }}</dd>
+    <dt>Created</dt><dd>{{ user.created_at }}</dd>
+    <dt>Last login</dt><dd>{{ user.last_login_at }}</dd>
+  </dl>
+</section>
+{% endblock %}

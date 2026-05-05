@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="grid">
+  <article class="card">
+    <p class="eyebrow">Profiles</p>
+    <h2>{{ data.total_profiles }}</h2>
+  </article>
+  <article class="card">
+    <p class="eyebrow">Role</p>
+    <h2>{{ data.current_user_role }}</h2>
+  </article>
+  <article class="card">
+    <p class="eyebrow">Gender mix</p>
+    <ul class="plain-list">
+      {% for gender, count in data.by_gender.items() %}
+      <li>{{ gender }}: {{ count }}</li>
+      {% endfor %}
+    </ul>
+  </article>
+</section>
+{% endblock %}

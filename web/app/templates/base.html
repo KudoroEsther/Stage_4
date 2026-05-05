@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insighta Labs+</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="/dashboard" class="brand">Insighta Labs+</a>
+      <nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profiles">Profiles</a>
+        <a href="/search">Search</a>
+        <a href="/account">Account</a>
+      </nav>
+      <form action="/logout" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token or '' }}" />
+        <button type="submit" class="ghost">Logout</button>
+      </form>
+    </header>
+    <main class="shell">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

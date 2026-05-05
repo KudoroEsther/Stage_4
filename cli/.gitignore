@@ -1,0 +1,15 @@
+.env
+__pycache__
+seed_data.json
+seed_prev.py
+
+backend_server.out.log
+backend_server.err.log
+
+web_server.out.log
+web_server.err.log
+
+profiles_export.csv
+
+insighta.egg-info/
+build/

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <p class="eyebrow">Natural language search</p>
+  <form method="get" action="/search" class="inline-form">
+    <input type="text" name="q" placeholder="young males from nigeria" value="{{ q or '' }}" />
+    <button type="submit">Search</button>
+  </form>
+</section>
+{% if payload %}
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Country</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in payload.data %}
+      <tr>
+        <td><a href="/profiles/{{ row.id }}">{{ row.name }}</a></td>
+        <td>{{ row.gender }}</td>
+        <td>{{ row.age }}</td>
+        <td>{{ row.country_name }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endif %}
+{% endblock %}

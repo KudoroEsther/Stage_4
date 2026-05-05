@@ -1,4 +1,4 @@
-# Insighta Labs+ Stage 3
+# Insighta Labs+ Stage 4
 
 Insighta Labs+ Stage 3 is a multi-interface profile intelligence system with a shared backend, a server-rendered web portal, and a locally installed CLI. The backend is the source of truth for authentication, token lifecycle, user roles, profile data, exports, rate limiting, and API versioning.
 
